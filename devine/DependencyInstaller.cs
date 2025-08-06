@@ -28,7 +28,7 @@ public static class DependencyInstaller
                 "strings2.exe");
         }
     }
-
+    //
     private static void DownloadYara()
     {
         if (!Directory.Exists("yara"))
