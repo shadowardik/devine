@@ -1,0 +1,57 @@
+name: Build and Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  CONFIGURATION: 'Release'
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Find solution file
+      id: find-solution
+      run: |
+        $solution = Get-ChildItem -Filter *.sln | Select-Object -First 1 -ExpandProperty Name
+        if (-not $solution) { 
+          Write-Host "No solution file found, creating one..."
+          dotnet new sln -n devine
+          $solution = "devine.sln"
+        }
+        echo "solution=$solution" >> $env:GITHUB_OUTPUT
+
+    - name: Add projects to solution (if newly created)
+      if: steps.find-solution.outputs.solution == 'devine.sln'
+      run: |
+        dotnet sln add devine.csproj
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ steps.find-solution.outputs.solution }}
+
+    - name: Build
+      run: dotnet build --configuration ${{ env.CONFIGURATION }} --no-restore
+
+    - name: Publish artifacts
+      run: dotnet publish -c ${{ env.CONFIGURATION }} -o publish --no-build
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: devine-cc
+        path: publish/
+        if-no-files-found: error
