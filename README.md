@@ -1,7 +1,6 @@
 # Divine
 
 # Detects
-devine способен находить:
 
 Doomsday Client 
 
