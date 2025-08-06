@@ -1,4 +1,4 @@
-# Divine
+# Devine
 
 # Detects
 
