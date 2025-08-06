@@ -8,41 +8,33 @@ on:
 
 env:
   DOTNET_VERSION: '8.0.x'
-  CONFIGURATION: 'Release'  # Явно указываем Release конфигурацию
 
 jobs:
   build:
     name: Build
     runs-on: windows-latest
-    timeout-minutes: 10  # Устанавливаем таймаут для всего job
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      timeout-minutes: 2  # Таймаут для checkout
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
-      timeout-minutes: 2  # Таймаут для установки .NET
 
     - name: Restore dependencies
-      run: dotnet restore
-      timeout-minutes: 5  # Увеличиваем таймаут для restore
+      run: dotnet restore devine/devine.csproj  # Явно указываем ваш .csproj файл
 
     - name: Build
-      run: dotnet build --configuration ${{ env.CONFIGURATION }} --no-restore
-      timeout-minutes: 5  # Таймаут для build
+      run: dotnet build --configuration Release --no-restore
 
-    - name: Publish artifacts
-      run: dotnet publish -c ${{ env.CONFIGURATION }} -o publish --no-build
-      timeout-minutes: 5  # Таймаут для publish
+    - name: Publish
+      run: dotnet publish -c Release -o publish --no-build
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: devine-cc
+        name: devine
         path: publish/
         if-no-files-found: error
-      timeout-minutes: 2  # Таймаут для загрузки артефактов
