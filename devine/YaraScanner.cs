@@ -31,7 +31,7 @@ public class YaraScanner
         }
         catch (Exception ex)
         {
-            ConsoleHelper.AddProcessLog($"MUICache scan error: {ex.Message}");
+            ConsoleHelper.AddProcessLog($"MUICache error: {ex.Message}");
         }
     }
 
@@ -44,7 +44,7 @@ public class YaraScanner
             string yaraPath = Path.Combine("yara", "yara64.exe");
             if (!File.Exists(yaraPath))
             {
-                ConsoleHelper.AddProcessLog("YARA executable not found!");
+                ConsoleHelper.AddProcessLog("YARA not found!");
                 return;
             }
 
@@ -84,7 +84,7 @@ public class YaraScanner
         }
         catch (Exception ex)
         {
-            ConsoleHelper.AddProcessLog($"YARA scan error for {filePath}: {ex.Message}");
+            ConsoleHelper.AddProcessLog($"YARA error for {filePath}: {ex.Message}");
         }
     }
 

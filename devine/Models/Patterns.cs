@@ -1,7 +1,23 @@
-using System.Collections.Generic;
-
 public static class Patterns
 {
+    public static readonly string[] YaraRules =
+    {
+        "troxill.yar",
+        "nixploit.yar",
+        "m1rch_hb.yar",
+        "suspicious.yar"
+    };
+
+    public static int GetYaraScope(string ruleName)
+    {
+        return ruleName switch
+        {
+            "troxill" => 3500,
+            "nixploit" => 3500,
+            "m1rch_hb" => 3500,
+            "suspicious" => 1750
+        };
+    }
     public static Dictionary<string, (int scope, string description)> GetStringPatterns()
     {
         return new Dictionary<string, (int, string)>

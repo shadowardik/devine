@@ -26,7 +26,7 @@ public class DetectionEngine
 
         if (!string.IsNullOrEmpty(pattern))
         {
-            logMessage += $"\n   Pattern: {pattern}";
+            logMessage += $"\n   --> {pattern}";
         }
 
         Detections.Add(logMessage);
