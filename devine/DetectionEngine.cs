@@ -22,13 +22,21 @@ public class DetectionEngine
     public void AddDetection(int scope, string detectionType, string pattern = "")
     {
         TotalScope += scope;
-        string logMessage = $"[+] {scope} scope - {detectionType}";
-
-        if (!string.IsNullOrEmpty(pattern))
+        string logMessage;
+        if (detectionType.StartsWith("YARA: ") && !string.IsNullOrEmpty(pattern))
         {
-            logMessage += $"\n   --> {pattern}";
+            int idx = detectionType.IndexOf(" in ");
+            string shortType = idx > 0 ? detectionType.Substring(0, idx) : detectionType;
+            logMessage = $"[+] {scope} scope - {shortType}\n   File: {pattern}";
         }
-
+        else if (!string.IsNullOrEmpty(pattern))
+        {
+            logMessage = $"[+] {scope} scope - {detectionType}\n   String: {pattern}";
+        }
+        else
+        {
+            logMessage = $"[+] {scope} scope - {detectionType}";
+        }
         Detections.Add(logMessage);
     }
 }

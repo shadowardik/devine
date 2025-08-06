@@ -42,15 +42,79 @@ public class ProcessScanner
     {
         ConsoleHelper.AddProcessLog($"Scanning Java process: {process.ProcessName} (PID: {process.Id})");
 
+        try
+        {
+            foreach (var region in GetRwxRegions(process))
+            {
+                File.AppendAllText(ConsoleHelper.LogFilePath, $"rwx region: {region.BaseAddress:X} {region.RegionSize}\n");
+            }
+        }
+        catch (Exception ex)
+        {
+            ConsoleHelper.AddProcessLog($"RWX regions error: {ex.Message}");
+        }
+
         string outputFile = $"java_{process.Id}_strings.txt";
 
-        if (RunStringsUtility(process.Id, outputFile))
+        if (stringipoiskda(process.Id, outputFile))
         {
             AnalyzeStrings(outputFile, detectionEngine);
         }
     }
 
-    private bool RunStringsUtility(int pid, string outputFile)
+    private struct MemoryBasicInformation
+    {
+        public ulong BaseAddress;
+        public ulong AllocationBase;
+        public uint AllocationProtect;
+        public ulong RegionSize;
+        public uint State;
+        public uint Protect;
+        public uint Type;
+    }
+
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    private static extern int VirtualQueryEx(
+        System.IntPtr hProcess,
+        System.IntPtr lpAddress,
+        out MemoryBasicInformation lpBuffer,
+        uint dwLength);
+
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    private static extern bool ReadProcessMemory(
+        System.IntPtr hProcess,
+        System.IntPtr lpBaseAddress,
+        byte[] lpBuffer,
+        int dwSize,
+        out int lpNumberOfBytesRead);
+
+    private const uint PAGE_EXECUTE_READWRITE = 0x40;
+    private const uint MEM_COMMIT = 0x1000;
+
+    private IEnumerable<(ulong BaseAddress, ulong RegionSize)> GetRwxRegions(Process process)
+    {
+        var regions = new List<(ulong, ulong)>();
+        var handle = process.Handle;
+        ulong address = 0;
+        var mbiSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(MemoryBasicInformation));
+        while (true)
+        {
+            MemoryBasicInformation mbi;
+            int result = VirtualQueryEx(handle, (System.IntPtr)address, out mbi, mbiSize);
+            if (result == 0)
+                break;
+            if ((mbi.State & MEM_COMMIT) != 0 && (mbi.Protect & PAGE_EXECUTE_READWRITE) != 0)
+            {
+                regions.Add((mbi.BaseAddress, mbi.RegionSize));
+            }
+            address = mbi.BaseAddress + mbi.RegionSize;
+            if (address >= 0x7FFFFFFFFFFF)
+                break;
+        }
+        return regions;
+    }
+
+    private bool stringipoiskda(int pid, string outputFile)
     {
         try
         {

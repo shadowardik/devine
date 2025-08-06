@@ -28,14 +28,12 @@ public static class ConsoleHelper
     {
         Console.Title = "SWAGA";
         Console.CursorVisible = false;
-
         try
         {
             Console.WindowWidth = Math.Max(MIN_WINDOW_WIDTH, Console.WindowWidth);
             Console.WindowHeight = Math.Max(MIN_WINDOW_HEIGHT, Console.WindowHeight);
         }
         catch { }
-
         if (File.Exists(LogFilePath)) File.Delete(LogFilePath);
         InitializeLogFile();
     }
@@ -77,26 +75,27 @@ public static class ConsoleHelper
         }
     }
 
+    static void WriteScanLogSectionMessage()
+    {
+        File.AppendAllText(LogFilePath, "[*] Scan completed. see scan_log.txt\n");
+    }
+
     public static void FinalizeScan(int totalScope, List<string> detections)
     {
         try
         {
+            WriteScanLogSectionMessage();
             File.AppendAllText(LogFilePath, "---detections---\n");
             foreach (var detection in detections)
             {
                 string logEntry = detection.Replace(" (Pattern: ", "\n   Pattern: ");
                 File.AppendAllText(LogFilePath, $"{logEntry}\n");
             }
-
             File.AppendAllText(LogFilePath, "---verdict---\n");
             File.AppendAllText(LogFilePath, $"{totalScope} scope\n");
-
             string verdict = totalScope >= 3500 ? "cheater" :
                            totalScope >= 2000 ? "suspicious" : "clean";
-
             File.AppendAllText(LogFilePath, $"{verdict}\n");
-
-            AddProcessLog($"Scan completed! Verdict: {verdict}. See scan_log.txt");
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
         }
