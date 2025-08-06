@@ -31,7 +31,7 @@ public class ProcessScanner
             }
             catch (Exception ex)
             {
-                ConsoleHelper.AddProcessLog($"Error checking process {process.Id}: {ex.Message}");
+                ConsoleHelper.AddProcessLog($"Error open process {process.Id}: {ex.Message}");
             }
         }
 
@@ -111,7 +111,7 @@ public class ProcessScanner
                 }
                 catch (Exception ex)
                 {
-                    ConsoleHelper.AddProcessLog($"String pattern matching error ({pattern.Key}): {ex.Message}");
+                    ConsoleHelper.AddProcessLog($"String pattern error ({pattern.Key}): {ex.Message}");
                 }
             }
 
@@ -128,7 +128,7 @@ public class ProcessScanner
                 }
                 catch (System.Text.RegularExpressions.RegexMatchTimeoutException)
                 {
-                    ConsoleHelper.AddProcessLog($"Regex timeout for pattern: {pattern.Key}");
+                    ConsoleHelper.AddProcessLog($"timeout for pattern: {pattern.Key}");
                 }
                 catch (ArgumentException ex)
                 {
@@ -136,13 +136,13 @@ public class ProcessScanner
                 }
                 catch (Exception ex)
                 {
-                    ConsoleHelper.AddProcessLog($"Regex matching error ({pattern.Key}): {ex.Message}");
+                    ConsoleHelper.AddProcessLog($"Regex error ({pattern.Key}): {ex.Message}");
                 }
             }
         }
         catch (Exception ex)
         {
-            ConsoleHelper.AddProcessLog($"Analysis error: {ex.Message}");
+            ConsoleHelper.AddProcessLog($"error: {ex.Message}");
         }
         finally
         {
