@@ -8,46 +8,36 @@ on:
 
 env:
   DOTNET_VERSION: '8.0.x'
-  CONFIGURATION: 'Release'
+  CONFIGURATION: 'Release'  # Явно указываем Release конфигурацию
 
 jobs:
   build:
     name: Build
     runs-on: windows-latest
+    timeout-minutes: 10  # Устанавливаем таймаут для всего job
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      timeout-minutes: 2  # Таймаут для checkout
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
-
-    - name: Find solution file
-      id: find-solution
-      run: |
-        $solution = Get-ChildItem -Filter *.sln | Select-Object -First 1 -ExpandProperty Name
-        if (-not $solution) { 
-          Write-Host "No solution file found, creating one..."
-          dotnet new sln -n devine
-          $solution = "devine.sln"
-        }
-        echo "solution=$solution" >> $env:GITHUB_OUTPUT
-
-    - name: Add projects to solution (if newly created)
-      if: steps.find-solution.outputs.solution == 'devine.sln'
-      run: |
-        dotnet sln add devine.csproj
+      timeout-minutes: 2  # Таймаут для установки .NET
 
     - name: Restore dependencies
-      run: dotnet restore ${{ steps.find-solution.outputs.solution }}
+      run: dotnet restore
+      timeout-minutes: 5  # Увеличиваем таймаут для restore
 
     - name: Build
       run: dotnet build --configuration ${{ env.CONFIGURATION }} --no-restore
+      timeout-minutes: 5  # Таймаут для build
 
     - name: Publish artifacts
       run: dotnet publish -c ${{ env.CONFIGURATION }} -o publish --no-build
+      timeout-minutes: 5  # Таймаут для publish
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
@@ -55,3 +45,4 @@ jobs:
         name: devine-cc
         path: publish/
         if-no-files-found: error
+      timeout-minutes: 2  # Таймаут для загрузки артефактов
