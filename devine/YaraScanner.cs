@@ -25,7 +25,7 @@ public class YaraScanner
 
                 foreach (var exe in executables)
                 {
-                    ScanWithYaraRules(exe, detectionEngine);
+                    YaraScan(exe, detectionEngine);
                 }
             }
         }
@@ -35,7 +35,7 @@ public class YaraScanner
         }
     }
 
-    private void ScanWithYaraRules(string filePath, DetectionEngine detectionEngine)
+    private void YaraScan(string filePath, DetectionEngine detectionEngine)
     {
         if (!File.Exists(filePath)) return;
 

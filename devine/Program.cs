@@ -7,10 +7,10 @@ class Program
         try
         {
             ConsoleHelper.Initialize();
-            ConsoleHelper.PrintLogo();
+            ConsoleHelper.Logo();
 
             var scanner = new DetectionEngine();
-            scanner.ScanSystem();
+            scanner.SCANNAHUI();
 
             ConsoleHelper.FinalizeScan(scanner.TotalScope, scanner.Detections);
         }

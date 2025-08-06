@@ -8,7 +8,7 @@ public class DetectionEngine
     private readonly ProcessScanner _processScanner = new ProcessScanner();
     private readonly YaraScanner _yaraScanner = new YaraScanner();
 
-    public void ScanSystem()
+    public void SCANNAHUI()
     {
         DependencyInstaller.DownloadTools();
 

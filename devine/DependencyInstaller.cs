@@ -9,7 +9,7 @@ public static class DependencyInstaller
 
         try
         {
-            DownloadStringsUtility();
+            DownloadStrings2();
             DownloadYara();
             DownloadYaraRules();
         }
@@ -19,7 +19,7 @@ public static class DependencyInstaller
         }
     }
 
-    private static void DownloadStringsUtility()
+    private static void DownloadStrings2()
     {
         if (!File.Exists("strings2.exe"))
         {

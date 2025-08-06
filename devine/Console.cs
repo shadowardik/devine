@@ -45,7 +45,7 @@ public static class ConsoleHelper
         File.WriteAllText(LogFilePath, $"Scan started at {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n---scan log---\n");
     }
 
-    public static void PrintLogo()
+    public static void Logo()
     {
         Console.Clear();
         string[] logoLines = {
