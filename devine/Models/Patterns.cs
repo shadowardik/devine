@@ -5,7 +5,8 @@ public static class Patterns
         "troxill.yar",
         "nixploit.yar",
         "m1rch_hb.yar",
-        "suspicious.yar"
+        "suspicious.yar"// ,
+     // "test.yar"
     };
 
     public static int GetYaraScope(string ruleName)
@@ -46,6 +47,7 @@ public static class Patterns
             {"cortexcreator1337", (3500, "Cortex client in instance")},
             {"cortexproduct0", (3500, "Cortex client in instance")},
             {"_^]++++", (3500, "Cortex client in instance")},
+            // TODO: add new strings
 
             // Troxill Client
             {"trahil", (3500, "Troxill client in instance")},
@@ -79,7 +81,7 @@ public static class Patterns
             {"]]3]", (500, "Generative [LVL 3] [doomsday]")},
             {"]]2]", (500, "Generative [LVL 3] [doomsday]")},
             {"]]1]", (500, "Generative [LVL 3] [doomsday]")},
-            {"]]9]", (500, "Generative [LVL 3] [doomsday]")},
+            {"]]9]", (500, "Generative [LVL 3] [doomsday]")}, // TODO: rework this string
             {"\\*Nft", (3500, "Doomsday client in instance")},
             {"\\)JW8", (3500, "Doomsday client in instance")},
             {"SWAGOR_", (3500, "Doomsday client in instance")},
