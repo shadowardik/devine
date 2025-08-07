@@ -16,7 +16,7 @@ public static class Patterns
             "troxill" => 3500,
             "nixploit" => 3500,
             "m1rch_hb" => 3500,
-            "suspicious" => 1750
+            "suspicious" => 1750//
         };
     }
     public static Dictionary<string, (int scope, string description)> GetStringPatterns()
