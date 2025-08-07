@@ -46,7 +46,7 @@ public class ProcessScanner
         {
             foreach (var region in GetRwxRegions(process))
             {
-                File.AppendAllText(ConsoleHelper.LogFilePath, $"rwx region: {region.BaseAddress:X} {region.RegionSize}\n");
+                File.AppendAllText(ConsoleHelper.LogFilePath, $"[#] rwx region: {region.BaseAddress:X} {region.RegionSize}\n");
             }
         }
         catch (Exception ex)

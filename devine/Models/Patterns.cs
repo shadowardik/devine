@@ -69,7 +69,6 @@ public static class Patterns
             {"-3=-", (500, "Generative [LVL 3] [doomsday]")},
             {"-4=-", (500, "Generative [LVL 3] [doomsday]")},
             {"-0=-", (500, "Generative [LVL 3] [doomsday]")},
-            // {"-2-=", (500, "Generative [LVL 3] [doomsday]")},
             {"-3-=", (500, "Generative [LVL 3] [doomsday]")},
             {"-4-=", (500, "Generative [LVL 3] [doomsday]")},
             {"-0-=", (500, "Generative [LVL 3] [doomsday]")},
@@ -98,7 +97,7 @@ public static class Patterns
             {"WOMD", (3500, "Doomsday client in instance")},
 
             // Other
-            {"hitbîõåsmodule", (3500, "Hitboxes in instance")},
+            {"hitbï¿½ï¿½ï¿½smodule", (3500, "Hitboxes in instance")},
             {"Noise Client", (3500, "Hitboxes in instance")},
             {"HASH_TICK", (3500, "Hitboxes in instance")},
             {"girlrent", (3500, "Dreampool in instance")},
@@ -108,12 +107,12 @@ public static class Patterns
             {"examplemod/hb", (3500, "Hitboxes in instance")},
             {"bus1root", (3500, "Hitboxes in instance")},
             {"me/bushroot/hb/gui", (3500, "Hitboxes in instance")},
-            {"neathitbîõås", (3500, "Hitboxes in instance")},
+            {"neathitbï¿½ï¿½ï¿½s", (3500, "Hitboxes in instance")},
             {"glowesp", (3500, "Hitboxes in instance")},
             {"dsf.webp", (3500, "Hitboxes in instance")},
-            {"hitbîõås.setSize", (3500, "Hitboxes in instance")},
+            {"hitbï¿½ï¿½ï¿½s.setSize", (3500, "Hitboxes in instance")},
             {"chs/Profiller", (3500, "Hitboxes in instance")},
-            {"waohitbîõås", (3500, "Hitboxes in instance")},
+            {"waohitbï¿½ï¿½ï¿½s", (3500, "Hitboxes in instance")},
             {"5DIID_XMLDOMDocumentEvents", (3500, "Hitboxes in instance")},
             {"Derik1337", (3500, "Hitboxes in instance")},
             {"Exitension", (3500, "Hitboxes in instance")},
@@ -135,7 +134,7 @@ public static class Patterns
             {"bushrut", (3500, "Hitboxes in instance")},
             {"MagicInject", (3500, "Dreampool in instance")},
             {"clowdy", (3500, "Clowdy in instance")},
-            {"lmao/drip/customhitbîõås", (3500, "Hitboxes in instance")},
+            {"lmao/drip/customhitbï¿½ï¿½ï¿½s", (3500, "Hitboxes in instance")},
             {"combat/hitbox", (3500, "Hitboxes in instance")},
             {"me/tsglu/ke/hitboxcommands", (3500, "Hitboxes in instance")},
             {"stubborn.website", (3500, "Hitboxes in instance")},
@@ -151,21 +150,21 @@ public static class Patterns
     {
         // Doomsday regex
         {"^(?=.{10,15}$)(?!(.{5}=-)).*[^=-]=-[^=]{4}$", (3500, "Doomsday client in instance")},
-        {"^(.*P57.*|P57.*|.*P57)$", (3500, "Doomsday client in instance")},
-        {"^.{7,15}$", (3500, "Doomsday client in instance")},
+        // {"^(.*P57.*|P57.*|.*P57)$", (3500, "Doomsday client in instance")}, deepseek fuck you
+        // {"^.{7,15}$", (3500, "Doomsday client in instance")}, deepseek fuck you
         {"(?<=.{7})<>q", (3500, "Doomsday client in instance")},
         {"<>q(?=.{7})", (3500, "Doomsday client in instance")},
         {"7m=(?=.{4})", (3500, "Doomsday client in instance")},
         {"^(%|A|-%|W).*A%-", (3500, "Doomsday client in instance")},
         {"^.{6,40}A%-", (3500, "Doomsday client in instance")},
-        {"^.{6,}%Ou", (3500, "Doomsday client in instance")},
+        // {"^.{6,}%Ou", (3500, "Doomsday client in instance")}, TODO: rework this regex
         {"V=-.*\\)L\\)5", (3500, "Doomsday client in instance")},
         {"\\[Ik\\$#w!aT@K\\]V-=J", (3500, "Doomsday client in instance")},
         {";34\\$2lMvw", (3500, "Doomsday client in instance")},
         {"kPi7,A\\$><NXJm", (3500, "Doomsday client in instance")},
         {"<>G!jO@%><", (3500, "Doomsday client in instance")},
-        {"^(?:[^*]*\\*){3}[^*]*><", (3500, "Doomsday client in instance")},
-        {"^(?:[^%]*%){3}[^%]*0%-", (3500, "Doomsday client in instance")},
+        // {"^(?:[^*]*\\*){3}[^*]*><", (3500, "Doomsday client in instance")}, deepseek fuck you
+        // {"^(?:[^%]*%){3}[^%]*0%-", (3500, "Doomsday client in instance")},  deepseek fuck you
         {"XV><\\^/_b`#bw4", (3500, "Doomsday client in instance")},
         {"O%-pU%Ks\\*,i1d@0", (3500, "Doomsday client in instance")},
         {"6d=Z:!LX0%-C", (3500, "Doomsday client in instance")},

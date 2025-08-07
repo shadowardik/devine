@@ -26,7 +26,7 @@ public static class ConsoleHelper
 
     public static void Initialize()
     {
-        Console.Title = "SWAGA";
+        Console.Title = "{ Devine }";
         Console.CursorVisible = false;
         try
         {
@@ -52,7 +52,8 @@ public static class ConsoleHelper
             " / __ |/ __ \\  \\/ /  |/    \\_/ __ \\ ",
             "/ /_/ \\  ___/\\   /|  |   |  \\  ___/ ",
             "\\____ |\\___  >\\_/ |__|___|  /\\___  >",
-            "     \\/    \\/             \\/     \\/  beta"
+            "     \\/    \\/             \\/     \\/   beta"
+
         };
 
         foreach (var line in logoLines)
@@ -93,9 +94,6 @@ public static class ConsoleHelper
             }
             File.AppendAllText(LogFilePath, "---verdict---\n");
             File.AppendAllText(LogFilePath, $"{totalScope} scope\n");
-            string verdict = totalScope >= 3500 ? "cheater" :
-                           totalScope >= 2000 ? "suspicious" : "clean";
-            File.AppendAllText(LogFilePath, $"{verdict}\n");
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
         }
