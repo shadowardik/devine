@@ -1,9 +1,12 @@
-namespace d3vineCC.Models
+namespace devine.Models
 {
-    public class Detection
+    public class DetectionInfo
     {
-        public int Scope { get; set; }
-        public string Type { get; set; }
-        public string Pattern { get; set; }
+        public string Description { get; set; }
+        
+        public DetectionInfo(string description)
+        {
+            Description = description;
+        }
     }
 }

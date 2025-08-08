@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using devine.Models;
 
 public class YaraScanner
 {
@@ -75,9 +76,7 @@ public class YaraScanner
                     if (!string.IsNullOrEmpty(output))
                     {
                         string ruleName = Path.GetFileNameWithoutExtension(rule);
-                        detectionEngine.AddDetection(GetScopeForRule(ruleName),
-                            $"YARA: {ruleName} in {filePath}",
-                            filePath);
+                        detectionEngine.AddDetection($"YARA: {ruleName} in {filePath}", filePath);
                     }
                 }
             }
@@ -88,15 +87,5 @@ public class YaraScanner
         }
     }
 
-    private int GetScopeForRule(string ruleName)
-    {
-        return ruleName switch
-        {
-            "troxill" => 3500,
-            "nixploit" => 3500,
-            "m1rch_hb" => 3500,
-            "suspicious" => 2000,
-            _ => 1000
-        };
-    }
+
 }

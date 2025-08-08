@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using devine.Models;
 
 public class ProcessScanner
 {
@@ -170,7 +171,7 @@ public class ProcessScanner
                 {
                     if (content.Contains(pattern.Key))
                     {
-                        detectionEngine.AddDetection(pattern.Value.scope, pattern.Value.description, pattern.Key);
+                        detectionEngine.AddDetection(pattern.Value.Description, pattern.Key);
                     }
                 }
                 catch (Exception ex)
@@ -187,7 +188,7 @@ public class ProcessScanner
                         System.Text.RegularExpressions.RegexOptions.None,
                         TimeSpan.FromSeconds(10)))
                     {
-                        detectionEngine.AddDetection(pattern.Value.scope, pattern.Value.description, pattern.Key);
+                        detectionEngine.AddDetection(pattern.Value.Description, pattern.Key);
                     }
                 }
                 catch (System.Text.RegularExpressions.RegexMatchTimeoutException)

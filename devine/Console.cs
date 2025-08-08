@@ -92,8 +92,6 @@ public static class ConsoleHelper
                 string logEntry = detection.Replace(" (Pattern: ", "\n   Pattern: ");
                 File.AppendAllText(LogFilePath, $"{logEntry}\n");
             }
-            File.AppendAllText(LogFilePath, "---verdict---\n");
-            File.AppendAllText(LogFilePath, $"{totalScope} scope\n");
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
         }

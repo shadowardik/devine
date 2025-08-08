@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using devine.Models;
 
 public class DetectionEngine
 {
@@ -19,23 +20,23 @@ public class DetectionEngine
         _yaraScanner.ScanMuiCache(this);
     }
 
-    public void AddDetection(int scope, string detectionType, string pattern = "")
+    public void AddDetection(string detectionType, string pattern = "")
     {
-        TotalScope += scope;
+        TotalScope += 1;
         string logMessage;
         if (detectionType.StartsWith("YARA: ") && !string.IsNullOrEmpty(pattern))
         {
             int idx = detectionType.IndexOf(" in ");
             string shortType = idx > 0 ? detectionType.Substring(0, idx) : detectionType;
-            logMessage = $"[+] {scope} scope - {shortType}\n   File: {pattern}";
+            logMessage = $"[+] {shortType}\n   File: {pattern}";
         }
         else if (!string.IsNullOrEmpty(pattern))
         {
-            logMessage = $"[+] {scope} scope - {detectionType}\n   String: {pattern}";
+            logMessage = $"[+] {detectionType}\n   String: {pattern}";
         }
         else
         {
-            logMessage = $"[+] {scope} scope - {detectionType}";
+            logMessage = $"[+] {detectionType}";
         }
         Detections.Add(logMessage);
     }
